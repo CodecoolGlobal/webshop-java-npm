@@ -18,10 +18,11 @@ public class CartDaoMem implements CartDao {
 
     public static CartDaoMem getInstance() {
         if (instance == null) {
-            instance = new ProductCategoryDaoMem();
+            instance = new CartDaoMem();
         }
         return instance;
     }
+    
     @Override
     public void add(Product product) {
         product.setId(data.size() + 1);
@@ -29,29 +30,13 @@ public class CartDaoMem implements CartDao {
     }
 
     @Override
-    public void batchAdd(Product product, int number) {
-    for(int i = 0; i < number; i++){
-        product.setId(data.size()+1);
-        data.add(product);
-    }
-    }
+    public Product find(int id) { return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null); }
 
     @Override
-    public Product find(Product product) {
-        data.stream().findFirst()
+    public void remove(int id){
+        data.remove(find(id));
     }
 
-    @Override
-    public void remove(Product product) {
-        data.remove(product);
-    }
-
-    @Override
-    public void batchRemove(Product product, int number) {
-    for (int i = 0; i < number; i++){
-        data.remove(product);
-    }
-    }
 
     @Override
     public List<Product> getCart() {

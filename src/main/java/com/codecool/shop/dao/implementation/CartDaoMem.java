@@ -22,7 +22,7 @@ public class CartDaoMem implements CartDao {
         }
         return instance;
     }
-    
+
     @Override
     public void add(Product product) {
         product.setId(data.size() + 1);

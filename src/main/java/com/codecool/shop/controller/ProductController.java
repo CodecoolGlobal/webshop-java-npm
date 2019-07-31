@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class ProductController extends HttpServlet {
             int prodId = Integer.parseInt(productName);
             Product product = productDataStore.find(prodId);
             cartDataStore.add(product);
-            System.out.println(cartDataStore.getCart());
+            System.out.println(Arrays.stream(cartDataStore.getCart()).count());
         } catch (NumberFormatException e) {
             e.getStackTrace();
         }

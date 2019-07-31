@@ -35,13 +35,15 @@
 </div>
 <div class="row">
 <div class="col col-sm-12 col-md-6 col-lg-4" th:each="cat,iterStat : ${productsCategory}">
-    <form action="/products" method="POST">
-    <a href="/products"><div class="card" th:value="${cat.getId()}" name="Category">
+<!--    <form action="/products" method="POST">-->
+    <a href="/products">
+        <div class="card">
         <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${cat.getId()} + '.jpg'" alt="" />
         <div class="card-header">
             <h4 class="card-title" th:text="${cat.getName()}">Product name</h4>
         </div>
     </div></a>
+        <a th:href="'/products?category_ID='+${cat.getId()}" name="Category">ASD</a>
     </form>
 </div>
 </div>

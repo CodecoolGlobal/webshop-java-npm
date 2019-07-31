@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/products/"})
+@WebServlet(urlPatterns = {"/products"})
 public class ProductController extends HttpServlet {
     private int suppliesID = 1;
     private int productCategoryID = 1;
@@ -26,11 +26,13 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SupplierDaoMem supplierDataStore = SupplierDaoMem.getInstance();
-        ProductCategoryDao productDataStore = ProductCategoryDaoMem.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        ProductDao productDataStore = ProductDaoMem.getInstance();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("products", supplierDataStore.find(suppliesID).getProducts());
+        System.out.println(productDataStore.find(productCategoryID));
+        context.setVariable("products", productCategoryDataStore.find());
         context.setVariable("suppliers",supplierDataStore.getAll());
 
         // // Alternative setting of the template context
@@ -44,6 +46,8 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         suppliesID = Integer.parseInt(req.getParameter("Suppliers"));
+        productCategoryID = Integer.parseInt(req.getParameter("Category"));
+        System.out.println(productCategoryID);
         doGet(req,resp);
     }
 

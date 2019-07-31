@@ -49,18 +49,10 @@
                         <p class="lead" th:text="${prod.getProduct().getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <p class="lead" th:text="${prod.getQuantity()}">Qtt=1</p>
-                    </div>
-                    <div class="card-text">
-                        <a class="btn btn-success" th:href="${'?id='+ prod.getProduct().getId()}">Add to cart</a>
-                    </div>
-                    <div class="card-text">
-                        <a class="btn btn-light" th:href="${'/cart?id='+ prod.getProduct().getId()}">remove from cart</a>
-                    </div>
-                    <div class="card-text">
-                        <form th:class="'add'+${prod.getProduct().id}">
-                            <input type="number">
-                            <button class="btn btn-light" type="submit">set number of items</button>
+                        <form action="/cart" method="post">
+                            <input type="number" name="prodQuantity" th:value="${prod.getQuantity()}">
+                            <input type="hidden" name="prodId" th:value="${prod.getProduct().getId()}">
+                            <button class="btn btn-light" type="submit">set quantity</button>
                         </form>
                     </div>
                 </div>

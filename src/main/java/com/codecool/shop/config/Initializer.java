@@ -41,7 +41,7 @@ public class Initializer implements ServletContextListener {
 
         //setting up products and printing it
         productDataStore.add(new Product("PlayStation 4", 399.99f, "USD", "The technology in the PlayStation 4 is similar to the hardware found in modern personal computers. This familiarity is designed to make it easier and less expensive for game studios to develop games for the PS4.", homeConsoles, sony));
-        productDataStore.add(new Product("Switch", 299.99f, "USD", "The Nintendo Switch is a hybrid video game console, consisting of a console unit, a dock, and two Joy-Con controllers.", homeConsoles, nintendo));
+        productDataStore.add(new Product("Switch", 299.99f, "USD", "The Nintendo Switch is a hybrid video game console, consisting of a console unit, a dock, and two Joy-Con controllers.", hybridConsoles, nintendo));
         productDataStore.add(new Product("Xbox One", 499, "USD", "The Xbox One is an eighth-generation home video game console that was developed by Microsoft.", homeConsoles, microsoft));
     }
 }

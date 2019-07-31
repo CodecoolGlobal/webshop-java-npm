@@ -24,18 +24,24 @@ public class Initializer implements ServletContextListener {
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         //setting up a new supplier
-        Supplier amazon = new Supplier("Amazon", "Digital content and services");
-        supplierDataStore.add(amazon);
-        Supplier lenovo = new Supplier("Lenovo", "Computers");
-        supplierDataStore.add(lenovo);
+        Supplier sony = new Supplier("Sony", "Consumer and professional electronics, gaming, entertainment and financial services");
+        supplierDataStore.add(sony);
+        Supplier nintendo = new Supplier("Nintendo", "Consumer electronics and video game company");
+        supplierDataStore.add(nintendo);
+        Supplier microsoft = new Supplier("Microsoft", "It develops, manufactures, licenses, supports and sells computer software, consumer electronics, personal computers, and related services");
+        supplierDataStore.add(microsoft);
 
         //setting up a new product category
-        ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
-        productCategoryDataStore.add(tablet);
+        ProductCategory homeConsoles = new ProductCategory("Home Consoles", "Hardware", "A video game device that is primarily used for home gamers, as opposed to in arcades or some other commercial establishment");
+        productCategoryDataStore.add(homeConsoles);
+        ProductCategory handHeldConsoles = new ProductCategory("Handheld Consoles", "Hardware", "They are smaller and portable, allowing people to carry them and play them at any time or place, along with microconsoles and dedicated consoles.");
+        productCategoryDataStore.add(handHeldConsoles);
+        ProductCategory hybridConsoles = new ProductCategory("Hybrid Consoles", "Hardware", "Can be used as both a stationary and portable device.");
+        productCategoryDataStore.add(hybridConsoles);
 
         //setting up products and printing it
-        productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
-        productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
-        productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
+        productDataStore.add(new Product("PlayStation 4", 399.99f, "USD", "The technology in the PlayStation 4 is similar to the hardware found in modern personal computers. This familiarity is designed to make it easier and less expensive for game studios to develop games for the PS4.", homeConsoles, sony));
+        productDataStore.add(new Product("Switch", 299.99f, "USD", "The Nintendo Switch is a hybrid video game console, consisting of a console unit, a dock, and two Joy-Con controllers.", homeConsoles, nintendo));
+        productDataStore.add(new Product("Xbox One", 499, "USD", "The Xbox One is an eighth-generation home video game console that was developed by Microsoft.", homeConsoles, microsoft));
     }
 }

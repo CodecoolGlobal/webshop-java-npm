@@ -52,6 +52,9 @@
                         <a class="btn btn-success" th:href="${'?id='+ prod.getId()}">Add to cart</a>
                     </div>
                     <div class="card-text">
+                        <a class="btn btn-light" th:href="${'/cart?id='+ prod.getId()}">remove from cart</a>
+                    </div>
+                    <div class="card-text">
                         <form th:class="'add'+${prod.id}">
                             <input type="number">
                             <button class="btn btn-light" type="submit">set number of items</button>

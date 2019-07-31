@@ -23,7 +23,12 @@ public class CartController extends HttpServlet {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-
+        try {
+            int productId = Integer.parseInt(req.getParameter("id"));
+            cartDataStore.remove(productId);
+        }catch (NumberFormatException e){
+            e.getStackTrace();
+        }
         context.setVariable("cart", cartDataStore.getCart());
 
         engine.process("product/cart.html", context, resp.getWriter());

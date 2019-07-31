@@ -37,7 +37,6 @@
 </div>
 <div class="row">
     <div class="col col-sm-12 col-md-6 col-lg-4" th:each="cat,iterStat : ${productsCategory}">
-        <!--    <form action="/products" method="POST">-->
         <a th:href="'/products?category_ID='+${cat.getId()}" name="Category">
             <div class="card">
                 <img class="" src="http://placehold.it/400x250/000/fff"

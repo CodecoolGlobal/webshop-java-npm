@@ -44,15 +44,13 @@ public class ProductController extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         try {
             productCategoryID = Integer.parseInt(req.getParameter("category_ID"));
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             e.getStackTrace();
         }
         productsByCategory = productDataStore.getBy(productCategoryDataStore.find(productCategoryID));
         productsBySupplier = productDataStore.getBy(supplierDataStore.find(suppliesID));
-        System.out.println(productsBySupplier);
-        for(int i=0;i<productsByCategory.size();i++){
-            if (productsBySupplier.contains(productsByCategory.get(i)))
-            {
+        for (int i = 0; i < productsByCategory.size(); i++) {
+            if (productsBySupplier.contains(productsByCategory.get(i))) {
                 products.add(productsByCategory.get(i));
             }
         }
@@ -68,26 +66,20 @@ public class ProductController extends HttpServlet {
         } catch (NumberFormatException e) {
             e.getStackTrace();
         }
-        System.out.println(productCategoryID);
-        if(suppliesID == 0){
-            context.setVariable("products",productsByCategory);
-        }
-        else{
+        if (suppliesID == 0) {
+            context.setVariable("products", productsByCategory);
+        } else {
             context.setVariable("products", products);
         }
-        context.setVariable("suppliers",supplierDataStore.getAll());
+        context.setVariable("suppliers", supplierDataStore.getAll());
         suppliesID = 0;
 
-        // // Alternative setting of the template context
-        // Map<String, Object> params = new HashMap<>();
-        // params.put("category", productCategoryDataStore.find(1));
-        // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        // context.setVariables(params);
         engine.process("product/index.html", context, resp.getWriter());
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         suppliesID = Integer.parseInt(req.getParameter("Suppliers"));
-        doGet(req,resp);
+        doGet(req, resp);
     }
+}

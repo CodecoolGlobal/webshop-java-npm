@@ -1,11 +1,15 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.CartItem;
 import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -16,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +39,8 @@ public class ProductController extends HttpServlet {
         List<Product> products = new ArrayList<>();
         SupplierDaoMem supplierDataStore = SupplierDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        CartDao cartDataStore = CartDaoMem.getInstance();
+
         ProductDao productDataStore = ProductDaoMem.getInstance();
         try {
             productCategoryID = Integer.parseInt(req.getParameter("category_ID"));
@@ -51,6 +58,16 @@ public class ProductController extends HttpServlet {
         }
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+        context.setVariable("category", productCategoryDataStore.find(1));
+        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+        try {
+            String productName = req.getParameter("id");
+            int prodId = Integer.parseInt(productName);
+            Product product = productDataStore.find(prodId);
+            cartDataStore.add(product);
+        } catch (NumberFormatException e) {
+            e.getStackTrace();
+        }
         System.out.println(productCategoryID);
         if(suppliesID == 0){
             context.setVariable("products",productsByCategory);
@@ -74,10 +91,3 @@ public class ProductController extends HttpServlet {
         suppliesID = Integer.parseInt(req.getParameter("Suppliers"));
         doGet(req,resp);
     }
-
-}
-
-
-
-
-

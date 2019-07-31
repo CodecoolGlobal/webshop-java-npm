@@ -41,7 +41,9 @@ public class Initializer implements ServletContextListener {
 
         //setting up products and printing it
         productDataStore.add(new Product("PlayStation 4", 399.99f, "USD", "The technology in the PlayStation 4 is similar to the hardware found in modern personal computers. This familiarity is designed to make it easier and less expensive for game studios to develop games for the PS4.", homeConsoles, sony));
-        productDataStore.add(new Product("Switch", 299.99f, "USD", "The Nintendo Switch is a hybrid video game console, consisting of a console unit, a dock, and two Joy-Con controllers.", homeConsoles, nintendo));
+        productDataStore.add(new Product("Nintendo Switch", 299.99f, "USD", "The Nintendo Switch is a hybrid video game console, consisting of a console unit, a dock, and two Joy-Con controllers.", homeConsoles, nintendo));
         productDataStore.add(new Product("Xbox One", 499, "USD", "The Xbox One is an eighth-generation home video game console that was developed by Microsoft.", homeConsoles, microsoft));
+        productDataStore.add(new Product("PS Vita", 249, "USD", "The PlayStation Vita (officially abbreviated PS Vita or Vita) is a handheld video game console developed and released by Sony Computer Entertainment. It is the successor to the PlayStation Portable as part of the PlayStation brand of gaming devices.", homeConsoles, sony));
+        productDataStore.add(new Product("New Nintendo 3DS", 150, "USD", "The New Nintendo 3DS is a handheld game console developed by Nintendo. It is the fourth system in the Nintendo 3DS family of handheld consoles, following the original Nintendo 3DS, the Nintendo 3DS XL, and the Nintendo 2DS.", homeConsoles, nintendo));
     }
 }

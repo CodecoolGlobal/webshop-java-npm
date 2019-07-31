@@ -49,10 +49,10 @@
 
                     <div id="collapseOne" class="collapse show"  aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div class="card-body">
-                            <form action="/" method="POST">
+                            <form action="/products/*" method="POST">
                             <ul th:each="sup,iterStat : ${suppliers}">
-                                <li><input type="radio" name="Suppliers" th:value="${sup.getId()}" id="supID">
-                                    <label th:text="${sup.getName()}" for="supID"></label>
+                                <li><input type="radio" name="Suppliers" th:value="${sup.getId()}" id="supID" th:for="${sup.getId()}">
+                                    <label th:text="${sup.getName()}" for="supID" th:for="${sup.getId()}"></label>
                                 </li>
                             </ul>
                                 <input type="submit">

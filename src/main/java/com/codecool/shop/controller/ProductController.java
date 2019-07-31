@@ -18,13 +18,15 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/"})
+@WebServlet(urlPatterns = {"/products/"})
 public class ProductController extends HttpServlet {
     private int suppliesID = 1;
+    private int productCategoryID = 1;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SupplierDaoMem supplierDataStore = SupplierDaoMem.getInstance();
+        ProductCategoryDao productDataStore = ProductCategoryDaoMem.getInstance();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -44,6 +46,10 @@ public class ProductController extends HttpServlet {
         suppliesID = Integer.parseInt(req.getParameter("Suppliers"));
         doGet(req,resp);
     }
+
 }
+
+
+
 
 

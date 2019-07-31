@@ -51,13 +51,12 @@ public class CartController extends HttpServlet {
         try {
             int prodQuantity = Integer.parseInt(request.getParameter("prodQuantity"));
             int prodId = Integer.parseInt(request.getParameter("prodId"));
-            System.out.println(prodId);
-            System.out.println(prodQuantity);
             for(CartItem cartItem : cartDataStore.getCart()){
                 if(cartItem.getProduct().getId() == prodId){
-                    cartItem.setQuantity(prodQuantity);
+                    if(prodQuantity == 0){
+                        cartDataStore.remove(prodId);
+                    }cartItem.setQuantity(prodQuantity);
                 }
-                System.out.println(cartItem.getQuantity());
             }
         }catch (NumberFormatException e){
             e.getStackTrace();

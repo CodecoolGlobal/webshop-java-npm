@@ -28,6 +28,7 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <script src="/static/js/main.js" defer></script>
 </head>
 
 <body>
@@ -35,8 +36,16 @@
 <div class="jumbotron text-center">
     <h1>Console Shop</h1>
 </div>
-<div>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a class="btn btn-dark" href="/cart">Cart</a>
+    <a class="btn btn-dark" href="/">Category</a>
+    <a class="btn btn-dark" href="#">Checkout</a>
+</div>
+<span onclick="openNav()"><img src="static/img/right-512.png" class="menu-icon"></span>
+</div>
+<div>
+
 </div>
 
 <div class="container">
@@ -63,7 +72,8 @@
                                         <label th:text="${sup.getName()}" for="supID" th:for="${sup.getId()}"></label>
                                     </li>
                                 </ul>
-                                <input type="submit">
+                                <input type="submit" value="Sort">
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -92,8 +102,9 @@
             </div>
 
         </div>
+    </div>
+</div>
 
-        <div th:replace="footer.html :: copy"></div>
-
+<div th:replace="footer.html :: copy"></div>
 </body>
 </html>

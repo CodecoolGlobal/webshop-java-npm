@@ -4,7 +4,7 @@ import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.model.CartItem;
 import com.codecool.shop.model.Product;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,7 +53,7 @@ public class CartDaoMem implements CartDao {
 
 
     @Override
-    public Object[] getCart() {
-        return data.entrySet().toArray();
+    public Collection<CartItem> getCart() {
+        return data.values();
     }
 }

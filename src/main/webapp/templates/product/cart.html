@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <meta name="author" content="Codecool" />
@@ -39,23 +39,26 @@
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat:${cart}">
             <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
+                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.getProduct().getId()} + '.jpg'" alt="" />
                 <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
+                    <h4 class="card-title" th:text="${prod.getProduct().getName()}">Product name</h4>
+                    <p class="card-text" th:text="${prod.getProduct().getDescription()}">Product description... </p>
                 </div>
                 <div class="card-body">
                     <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                        <p class="lead" th:text="${prod.getProduct().getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" th:href="${'?id='+ prod.getId()}">Add to cart</a>
+                        <p class="lead" th:text="${prod.getQuantity()}">Qtt=1</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-light" th:href="${'/cart?id='+ prod.getId()}">remove from cart</a>
+                        <a class="btn btn-success" th:href="${'?id='+ prod.getProduct().getId()}">Add to cart</a>
                     </div>
                     <div class="card-text">
-                        <form th:class="'add'+${prod.id}">
+                        <a class="btn btn-light" th:href="${'/cart?id='+ prod.getProduct().getId()}">remove from cart</a>
+                    </div>
+                    <div class="card-text">
+                        <form th:class="'add'+${prod.getProduct().id}">
                             <input type="number">
                             <button class="btn btn-light" type="submit">set number of items</button>
                         </form>

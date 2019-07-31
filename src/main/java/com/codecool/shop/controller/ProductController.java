@@ -7,6 +7,7 @@ import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.model.CartItem;
 import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -39,7 +40,6 @@ public class ProductController extends HttpServlet {
             int prodId = Integer.parseInt(productName);
             Product product = productDataStore.find(prodId);
             cartDataStore.add(product);
-            System.out.println(Arrays.stream(cartDataStore.getCart()).count());
         } catch (NumberFormatException e) {
             e.getStackTrace();
         }

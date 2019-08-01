@@ -59,6 +59,7 @@
                 <div class="card-body">
                     <div class="card-text">
                         <p class="lead" th:text="${prod.getProduct().getPrice()}">100 USD</p>
+                        <p class="lead" th:text="'item total: ' + ${prod.getSumPrice()} + ' $'">1000 USD</p>
                     </div>
                     <div class="card-text">
                         <form action="/cart" method="post">
@@ -71,7 +72,7 @@
             </div>
         </div>
     </div>
-
+    <div><h2 th:text="'total price: '+${total}+ ' $'"></h2></div>
 </div>
 <div><a class="btn btn-dark" href="/">Buy some more!</a></div>
 

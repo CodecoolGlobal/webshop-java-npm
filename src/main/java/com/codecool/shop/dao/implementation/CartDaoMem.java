@@ -12,10 +12,11 @@ public class CartDaoMem implements CartDao {
 
     private Map<Integer, CartItem> data = new HashMap<>();
     private static CartDaoMem instance = null;
+    private Float totalPrice = 0F;
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private CartDaoMem() {
+    public CartDaoMem() {
     }
 
     public static CartDaoMem getInstance() {
@@ -45,5 +46,19 @@ public class CartDaoMem implements CartDao {
     @Override
     public Collection<CartItem> getCart() {
         return data.values();
+    }
+
+    public int getCartSize(){
+        int cartSize = 0;
+        for(CartItem cartItem : data.values()){
+            cartSize += cartItem.getQuantity();
+        }return cartSize;
+    }
+
+    public Float getTotalPrice(){
+        totalPrice = 0F;
+        for(CartItem cartItem : data.values()){
+            totalPrice += cartItem.getSumPrice();
+        }return totalPrice;
     }
 }

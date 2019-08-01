@@ -10,4 +10,6 @@ public interface CartDao {
     //Product find(int id);
     void remove(int id);
     Collection<CartItem> getCart();
+    int getCartSize();
+    Float getTotalPrice();
 }

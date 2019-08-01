@@ -35,19 +35,17 @@ public class CartController extends HttpServlet {
         }catch (NumberFormatException e){
             e.getStackTrace();
         }
-        /*Collection<Product> products = new ArrayList<>();
-        for(CartItem cartItem:cartDataStore.getCart()){
-            products.add(cartItem.getProduct());
-        }*/
+        for (CartItem cartItem : cartDataStore.getCart()) {
+             cartItem.setSumPrice(cartItem.getQuantity()*cartItem.getProduct().getPriceFloat());
+        }
         context.setVariable("cart", cartDataStore.getCart());
+        context.setVariable("total", cartDataStore.getTotalPrice());
         engine.process("product/cart.html", context, resp.getWriter());
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         CartDao cartDataStore = CartDaoMem.getInstance();
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
-        WebContext context = new WebContext(request, response, request.getServletContext());
         try {
             int prodQuantity = Integer.parseInt(request.getParameter("prodQuantity"));
             int prodId = Integer.parseInt(request.getParameter("prodId"));
@@ -62,8 +60,7 @@ public class CartController extends HttpServlet {
         }catch (NumberFormatException e){
             e.getStackTrace();
         }
-        context.setVariable("cart", cartDataStore.getCart());
-        engine.process("product/cart.html",context,response.getWriter());
+        doGet(request, response);
     }
 
 }

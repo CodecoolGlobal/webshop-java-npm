@@ -11,4 +11,5 @@ public interface CartDao {
     void remove(int id);
     Collection<CartItem> getCart();
     int getCartSize();
+    Float getTotalPrice();
 }

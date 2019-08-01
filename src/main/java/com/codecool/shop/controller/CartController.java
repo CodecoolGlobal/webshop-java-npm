@@ -35,15 +35,11 @@ public class CartController extends HttpServlet {
         }catch (NumberFormatException e){
             e.getStackTrace();
         }
-        Float totalPrice = 0F;
-        for(CartItem cartItem : cartDataStore.getCart()){
-            totalPrice += cartItem.getProduct().getPriceFloat()*cartItem.getQuantity();
-        }
         for (CartItem cartItem : cartDataStore.getCart()) {
              cartItem.setSumPrice(cartItem.getQuantity()*cartItem.getProduct().getPriceFloat());
         }
         context.setVariable("cart", cartDataStore.getCart());
-        context.setVariable("total", totalPrice);
+        context.setVariable("total", cartDataStore.getTotalPrice());
         engine.process("product/cart.html", context, resp.getWriter());
     }
 

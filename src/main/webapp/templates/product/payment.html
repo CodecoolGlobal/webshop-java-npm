@@ -36,16 +36,19 @@
 </div>
 <div>
     <div>
-        <button th:text="'Total Cost: '+${total}"></button>
-        <form method="get" action="/payment">
-            <button class="btn btn-secondary" type="button" name="payment_type" value="card">Debit card</button>
-            <button class="btn btn-secondary" type="button" name="payment_type" value="paypal">Paypal</button>
+        <button class="btn btn-light btn-lg btn-block" th:text="'Total Cost: '+${total} + ' USD'"></button>
+        <form action="/payment">
+            <label class="btn btn-secondary btn-lg" >Debit card</label>
+            <input type="radio" name="payment_type" value="card"/>
+            <label class="btn btn-secondary btn-lg">Paypal</label>
+            <input type="radio" name="payment_type" value="paypal"/>
             <div>
-                <button class="btn btn-primary btn-lg" type="submit">Select Payment</button>
+                <input class="btn btn-primary btn-lg btn-block" type="submit">Select Payment</input>
             </div>
         </form>
     </div>
+    <div th:if="${payment_method.equals('card')}" th:insert="payment/card-payment.html :: card"></div>
+    <div th:if="${payment_method.equals('paypal')}" th:insert="payment/paypal-payment.html :: paypal"></div>
 </div>
-
 </body>
 </html>

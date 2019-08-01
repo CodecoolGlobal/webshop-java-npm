@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>Card payment</title>
+</head>
+<body>
+<div th:fragment="card">
+    <form action="/payment" method="post">
+        <div><input type="number" name="card_number" placeholder="card number" maxlength="16"></div>
+        <div><input type="text" name="card_holder" placeholder="card owner's name"></div>
+        <div><input type="number" name="expiry_date1" maxlength="2" placeholder="expiry date pt1">
+        <input type="number" name="expiry_date2" placeholder="expiry date pt2" maxlength="2"></div>
+        <div><input type="number" name="code" placeholder="CSV code" maxlength="3"></div>
+        <input class="btn btn-primary btn-lg" name="buy" type="submit">
+    </form>
+</div>
+</body>
+</html>

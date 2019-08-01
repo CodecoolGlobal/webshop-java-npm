@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CartDaoMem implements CartDao {
-
     private Map<Integer, CartItem> data = new HashMap<>();
     private static CartDaoMem instance = null;
     private Float totalPrice = 0F;

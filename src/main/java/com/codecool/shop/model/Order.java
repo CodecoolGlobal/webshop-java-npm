@@ -1,15 +1,25 @@
 package com.codecool.shop.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.Collection;
 
 public class Order{
     private  int id;
+    @Expose
     private String name;
+    @Expose
     private String email;
+    @Expose
     private String phoneNumber;
+    @Expose
     private String billingAddress;
+    @Expose
     private String shippingAddress;
+    @Expose
     private Collection<CartItem> cart;
+    @Expose
+    private float orderTotalPrice;
 
     public String getName() {
         return name;
@@ -65,5 +75,12 @@ public class Order{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setOrderTotalPrice() {
+        orderTotalPrice = 0f;
+        for (CartItem cartItem : cart) {
+            orderTotalPrice += cartItem.getSumPrice();
+        }
     }
 }

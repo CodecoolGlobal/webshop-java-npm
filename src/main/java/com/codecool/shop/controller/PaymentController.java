@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -50,9 +52,9 @@ public class PaymentController extends HttpServlet {
         CartDao cartDao = CartDaoMem.getInstance();
         OrderDao orderDao = OrderDaoMem.getInstance();
         orderDao.getBy(1).setOrderTotalPrice();
-        LocalTime time = LocalTime.now();
+        LocalDateTime time = LocalDateTime.now();
         Gson gsonBuilder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        File file = new File("./src/logs"+"1"+format("%s", time)+".txt");
+        File file = new File("./src/log"+"1:"+format("%s", time)+".txt");
         file.createNewFile();
         FileWriter fileWriter = new FileWriter(file);
         fileWriter.write(gsonBuilder.toJson(orderDao.getAll()));

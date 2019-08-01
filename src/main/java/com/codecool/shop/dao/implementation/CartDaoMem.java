@@ -46,4 +46,11 @@ public class CartDaoMem implements CartDao {
     public Collection<CartItem> getCart() {
         return data.values();
     }
+
+    public int getCartSize(){
+        int cartSize = 0;
+        for(CartItem cartItem : data.values()){
+            cartSize += cartItem.getQuantity();
+        }return cartSize;
+    }
 }

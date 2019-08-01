@@ -15,7 +15,7 @@ public class CartDaoMem implements CartDao {
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private CartDaoMem() {
+    public CartDaoMem() {
     }
 
     public static CartDaoMem getInstance() {

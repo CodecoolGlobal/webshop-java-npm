@@ -39,10 +39,9 @@ public class CartController extends HttpServlet {
         for(CartItem cartItem : cartDataStore.getCart()){
             totalPrice += cartItem.getProduct().getPriceFloat()*cartItem.getQuantity();
         }
-        /*Collection<Product> products = new ArrayList<>();
-        for(CartItem cartItem:cartDataStore.getCart()){
-            products.add(cartItem.getProduct());
-        }*/
+        for (CartItem cartItem : cartDataStore.getCart()) {
+             cartItem.setSumPrice(cartItem.getQuantity()*cartItem.getProduct().getPriceFloat());
+        }
         context.setVariable("cart", cartDataStore.getCart());
         context.setVariable("total", totalPrice);
         engine.process("product/cart.html", context, resp.getWriter());

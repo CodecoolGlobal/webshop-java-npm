@@ -73,7 +73,7 @@ public class ProductController extends HttpServlet {
         }
         context.setVariable("suppliers", supplierDataStore.getAll());
         suppliesID = 0;
-
+        context.setVariable("cartSize", cartDataStore.getCartSize());
         engine.process("product/index.html", context, resp.getWriter());
     }
 

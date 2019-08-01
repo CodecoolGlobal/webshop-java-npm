@@ -35,20 +35,10 @@ public class CartDaoMem implements CartDao {
         }
     }
 
-//    @Override
-//    public Product find(int id) { return data.entrySet().stream().filter(t -> t.getId() == id).findFirst().orElse(null); }
 
     @Override
     public void remove(int id) {
         data.remove(id);
-    }
-
-    public void setQuantity(int id, int quantity) {
-        if (quantity == 0) {
-            data.remove(id);
-        } else {
-            data.get(id).setQuantity(quantity);
-        }
     }
 
 

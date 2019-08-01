@@ -55,6 +55,7 @@ public class CartController extends HttpServlet {
                 if(cartItem.getProduct().getId() == prodId){
                     if(prodQuantity == 0){
                         cartDataStore.remove(prodId);
+                        break;
                     }cartItem.setQuantity(prodQuantity);
                 }
             }

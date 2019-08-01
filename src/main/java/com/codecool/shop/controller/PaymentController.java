@@ -38,6 +38,8 @@ public class PaymentController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        CartDao cartDao = CartDaoMem.getInstance();
+        cartDao.clearCart();
         response.sendRedirect(request.getContextPath()+"/");
     }
 }

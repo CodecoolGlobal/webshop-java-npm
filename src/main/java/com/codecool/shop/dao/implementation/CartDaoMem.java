@@ -61,4 +61,8 @@ public class CartDaoMem implements CartDao {
             totalPrice += cartItem.getSumPrice();
         }return totalPrice;
     }
+
+    public void clearCart(){
+        data.clear();
+    }
 }

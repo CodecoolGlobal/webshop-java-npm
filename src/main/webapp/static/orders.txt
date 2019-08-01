@@ -1,1 +1,0 @@
-[{"name":"fjsdio","email":"dois","phoneNumber":"dnso","billingAddress":"niods","shippingAddress":"nefio","cart":[{"product":{"name":"PlayStation 4 Pro"},"quantity":3,"sumPrice":1199.97},{"product":{"name":"Xbox One"},"quantity":1,"sumPrice":499.0}],"orderTotalPrice":1698.97}]

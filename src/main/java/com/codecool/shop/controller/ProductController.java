@@ -79,7 +79,11 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        suppliesID = Integer.parseInt(req.getParameter("Suppliers"));
+        try{
+            suppliesID = Integer.parseInt(req.getParameter("Suppliers"));
+        }catch (NumberFormatException e){
+            doGet(req,resp);
+        }
         doGet(req, resp);
     }
 }

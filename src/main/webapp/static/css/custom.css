@@ -103,6 +103,10 @@ ul{
     top:0;
     left:0;
 }
+
+form-container{
+    width:60%;
+}
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}

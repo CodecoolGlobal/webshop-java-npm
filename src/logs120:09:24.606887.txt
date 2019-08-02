@@ -1,0 +1,1 @@
+[{"name":"jgdisoj","email":"ngduign","phoneNumber":"iubnxicbn","billingAddress":"NVDIUNVINBD","shippingAddress":"same","cart":[{"product":{"name":"PS Vita"},"quantity":15,"sumPrice":3735.0},{"product":{"name":"New Nintendo 3DS"},"quantity":1,"sumPrice":150.0}],"orderTotalPrice":3885.0}]

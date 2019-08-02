@@ -1,11 +1,14 @@
 package com.codecool.shop.model;
 
 
+import com.google.gson.annotations.Expose;
+
 import java.lang.reflect.Field;
 
 public class BaseModel {
 
     protected int id;
+    @Expose
     protected String name;
     protected String description;
 

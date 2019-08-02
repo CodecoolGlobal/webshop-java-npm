@@ -1,8 +1,13 @@
 package com.codecool.shop.model;
 
+import com.google.gson.annotations.Expose;
+
 public class CartItem{
+    @Expose
     Product product;
+    @Expose
     private int quantity = 1;
+    @Expose
     private float sumPrice = 0f;
 
     public CartItem(Product product){

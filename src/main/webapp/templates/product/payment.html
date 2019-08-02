@@ -38,12 +38,12 @@
     <div>
         <button class="btn btn-light btn-lg btn-block" th:text="'Total Cost: '+${total} + ' USD'"></button>
         <form action="/payment">
-            <label class="btn btn-secondary btn-lg" >Debit card</label>
+            <label class="btn btn-secondary btn-lg disabled" >Debit card</label>
             <input type="radio" name="payment_type" value="card"/>
-            <label class="btn btn-secondary btn-lg">Paypal</label>
+            <label class="btn btn-secondary btn-lg disabled">Paypal</label>
             <input type="radio" name="payment_type" value="paypal"/>
             <div>
-                <input class="btn btn-primary btn-lg btn-block" type="submit">Select Payment</input>
+                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Select payment method">
             </div>
         </form>
     </div>

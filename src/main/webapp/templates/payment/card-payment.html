@@ -10,12 +10,12 @@
 <body>
 <div th:fragment="card">
     <form action="/payment" method="post">
-        <div><input type="number" name="card_number" placeholder="card number" maxlength="16"></div>
-        <div><input type="text" name="card_holder" placeholder="card owner's name"></div>
-        <div><input type="number" name="expiry_date1" maxlength="2" placeholder="expiry date pt1">
-        <input type="number" name="expiry_date2" placeholder="expiry date pt2" maxlength="2"></div>
-        <div><input type="number" name="code" placeholder="CSV code" maxlength="3"></div>
-        <input class="btn btn-primary btn-lg" name="buy" type="submit">
+        <div><input class="form-control" type="number" name="card_number" placeholder="card number" maxlength="16"></div>
+        <div><input class="form-control" type="text" name="card_holder" placeholder="card owner's name"></div>
+        <div class="form-row"><div class="col"><input class="form-control" type="number" name="expiry_date1" maxlength="2" placeholder="expiry date pt1"></div>
+        <div class="col"><input class="form-control" type="number" name="expiry_date2" placeholder="expiry date pt2" maxlength="2"></div></div>
+        <div><input class="form-control" type="number" name="code" placeholder="CSV code" maxlength="3"></div>
+        <input class="btn btn-primary btn-lg" name="buy" type="submit" value="Buy items">
     </form>
 </div>
 </body>

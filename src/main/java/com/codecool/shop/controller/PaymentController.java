@@ -9,7 +9,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
-
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,10 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 
 import static java.lang.String.format;
 
@@ -52,9 +48,9 @@ public class PaymentController extends HttpServlet {
         CartDao cartDao = CartDaoMem.getInstance();
         OrderDao orderDao = OrderDaoMem.getInstance();
         orderDao.getBy(1).setOrderTotalPrice();
-        LocalDateTime time = LocalDateTime.now();
+        LocalTime time = LocalTime.now();
         Gson gsonBuilder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        File file = new File("./src/log"+"1:"+format("%s", time)+".txt");
+        File file = new File("./src/logs"+"1"+format("%s", time)+".txt");
         file.createNewFile();
         FileWriter fileWriter = new FileWriter(file);
         fileWriter.write(gsonBuilder.toJson(orderDao.getAll()));

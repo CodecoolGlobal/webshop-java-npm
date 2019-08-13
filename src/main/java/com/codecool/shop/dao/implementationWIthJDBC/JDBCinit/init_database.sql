@@ -115,3 +115,7 @@ VALUES (3,'Microsoft',
 
 
 INSERT INTO product VALUES (1,'PlayStation 4 Pro', 399.99, 'USD', 'The technology in the PlayStation 4 is similar to the hardware found in modern personal computers. This familiarity is designed to make it easier and less expensive for game studios to develop games for the PS4.',1,1);
+INSERT INTO product VALUES (2, 'PS Vita', 249, 'USD', 'The PlayStation Vita (officially abbreviated PS Vita or Vita) is a handheld video game console developed and released by Sony Computer Entertainment. It is the successor to the PlayStation Portable as part of the PlayStation brand of gaming devices.', 2, 1);
+INSERT INTO product VALUES (3, 'Switch', 299.99, 'USD', 'The Nintendo Switch is a hybrid video game console, consisting of a console unit, a dock, and two Joy-Con controllers.', 3, 2);
+INSERT INTO product VALUES (4, 'Xbox One', 499, 'USD', 'The Xbox One is an eighth-generation home video game console that was developed by Microsoft.', 1, 3);
+INSERT INTO product VALUES (5, 'New Nintendo 3DS', 150, 'USD', 'The New Nintendo 3DS is a handheld game console developed by Nintendo. It is the fourth system in the Nintendo 3DS family of handheld consoles, following the original Nintendo 3DS, the Nintendo 3DS XL, and the Nintendo 2DS.', 2, 2);

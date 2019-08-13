@@ -8,30 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SupplierDaoJdbc extends DatabaseAccess implements SupplierDao {
-    private static final String DATABASE = "jdbc:postgresql://localhost:5432/webshop";
-    private static final String DB_USER = System.getenv("DB_USER");
-    private static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
-
-    public Connection getConnection() {
-        try {
-            return DriverManager.getConnection(
-                    DATABASE,
-                    DB_USER,
-                    DB_PASSWORD);
-        } catch (SQLException e) {
-            System.err.println("ERROR: Connection error.");
-            e.printStackTrace();
-        }
-        return null;
-    }
+    private Connection connection = getConnection();
 
     @Override
     public void add(Supplier supplier) {
     }
 
     @Override
-    public Supplier find(int id) {
-        return null;
+    public Supplier find(int id) throws SQLException {
+    PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM supplier WHERE id=? ");
+    preparedStatement.setInt(1,id);
+    ResultSet resultSet = preparedStatement.executeQuery();
+    resultSet.next();
+    Supplier supplier = new Supplier(resultSet.getString(2),resultSet.getString(3));
+    return supplier;
     }
 
     @Override
@@ -41,7 +31,6 @@ public class SupplierDaoJdbc extends DatabaseAccess implements SupplierDao {
 
     @Override
     public List<Supplier> getAll() throws SQLException {
-        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM supplier");
         ResultSet resultSet = preparedStatement.executeQuery();
         List<Supplier> suppliers = new ArrayList<>();

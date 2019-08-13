@@ -32,4 +32,11 @@ class SupplierDaoJdbcTest {
         assertNotEquals(supplierDaoJdbc.getAll().get(1).getName(), supplierDaoJdbc.getAll().get(0).getName());
     }
 
+    @Test
+    void testFindFirst() throws SQLException {
+        Supplier supplier =  new Supplier("Sony", "Consumer and professional electronics, gaming, entertainment and financial services");
+        SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc();
+        assertEquals(supplier.getName(), supplierDaoJdbc.find(1).getName());
+    }
+
 }

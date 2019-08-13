@@ -1,0 +1,31 @@
+package com.codecool.shop.dao.implementationWIthJDBC;
+
+import com.codecool.shop.model.Supplier;
+import org.junit.jupiter.api.Test;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class SupplierDaoJdbcTest {
+
+    @Test
+    void testSupplierGetAllFirstNameJDBC() throws SQLException {
+        List<Supplier> supplierList = new ArrayList<>();
+        supplierList.add(new Supplier("Sony", "Consumer and professional electronics, gaming, entertainment and financial services"));
+        supplierList.add(new Supplier("Nintendo", "Consumer electronics and video game company"));
+        supplierList.add(new Supplier("Microsoft", "It develops, manufactures, licenses, supports and sells computer software, consumer electronics, personal computers, and related services"));
+        SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc();
+        assertEquals(supplierList.get(0).getName(),supplierDaoJdbc.getAll().get(0).getName());
+    }
+
+
+    @Test
+    void testSupplierGetAllFirstNotEqualsSecondJDBC() throws SQLException {
+        SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc();
+        assertNotEquals(supplierDaoJdbc.getAll().get(1).getName(), supplierDaoJdbc.getAll().get(0).getName());
+    }
+
+}

@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +48,11 @@ public class ProductController extends HttpServlet {
         } catch (NumberFormatException e) {
             e.getStackTrace();
         }
-        productsByCategory = productDataStore.getBy(productCategoryDataStore.find(productCategoryID));
+        try {
+            productsByCategory = productDataStore.getBy(productCategoryDataStore.find(productCategoryID));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         productsBySupplier = productDataStore.getBy(supplierDataStore.find(suppliesID));
         for (int i = 0; i < productsByCategory.size(); i++) {
             if (productsBySupplier.contains(productsByCategory.get(i))) {
@@ -56,8 +61,16 @@ public class ProductController extends HttpServlet {
         }
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("category", productCategoryDataStore.find(1));
-        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+        try {
+            context.setVariable("category", productCategoryDataStore.find(1));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try {
             String productName = req.getParameter("id");
             int prodId = Integer.parseInt(productName);

@@ -10,20 +10,22 @@ import java.util.List;
 public class SupplierDaoJdbc extends DatabaseAccess implements SupplierDao {
     private Connection connection = getConnection();
 
+    @Deprecated
     @Override
     public void add(Supplier supplier) {
     }
 
     @Override
     public Supplier find(int id) throws SQLException {
-    PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM supplier WHERE id=? ");
-    preparedStatement.setInt(1,id);
-    ResultSet resultSet = preparedStatement.executeQuery();
-    resultSet.next();
-    Supplier supplier = new Supplier(resultSet.getString(2),resultSet.getString(3));
-    return supplier;
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM supplier WHERE id=? ");
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        Supplier supplier = new Supplier(resultSet.getString(2), resultSet.getString(3));
+        return supplier;
     }
 
+    @Deprecated
     @Override
     public void remove(int id) {
 
@@ -34,14 +36,15 @@ public class SupplierDaoJdbc extends DatabaseAccess implements SupplierDao {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM supplier");
         ResultSet resultSet = preparedStatement.executeQuery();
         List<Supplier> suppliers = new ArrayList<>();
-        while (resultSet.next()){
+        while (resultSet.next()) {
 
             Supplier supplier = new Supplier(
                     resultSet.getString("name"),
                     resultSet.getString("description")
             );
             suppliers.add(supplier);
-        }return suppliers;
+        }
+        return suppliers;
 
     }
 }

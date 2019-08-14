@@ -1,15 +1,13 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.CartItem;
 import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -21,11 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(urlPatterns = {"/products"})
 public class ProductController extends HttpServlet {
@@ -53,7 +48,11 @@ public class ProductController extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        productsBySupplier = productDataStore.getBy(supplierDataStore.find(suppliesID));
+        try {
+            productsBySupplier = productDataStore.getBy(supplierDataStore.find(suppliesID));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         for (int i = 0; i < productsByCategory.size(); i++) {
             if (productsBySupplier.contains(productsByCategory.get(i))) {
                 products.add(productsByCategory.get(i));

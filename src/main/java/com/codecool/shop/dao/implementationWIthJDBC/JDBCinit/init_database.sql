@@ -41,7 +41,8 @@ CREATE TABLE cart
 (
     id        SERIAL NOT NULL,
     quantity  INTEGER,
-    sum_price FLOAT
+    sum_price FLOAT,
+    product_id INTEGER
 );
 
 DROP TABLE IF EXISTS "order";
@@ -72,6 +73,7 @@ CREATE TABLE product
     cart_id     INTEGER
 );
 
+
 ALTER TABLE ONLY cart
     ADD CONSTRAINT pk_cart_id PRIMARY KEY (id);
 
@@ -91,10 +93,11 @@ ALTER TABLE ONLY product
     ADD CONSTRAINT fk_supplier_id FOREIGN KEY (supplier_id) REFERENCES supplier (id);
 
 ALTER TABLE ONLY product
-    ADD CONSTRAINT fk_cart_id FOREIGN KEY (cart_id) REFERENCES cart (id);
-
-ALTER TABLE ONLY product
     ADD CONSTRAINT fk_product_category_id FOREIGN KEY (category_id) REFERENCES product_category (id);
+
+ALTER TABLE ONLY cart
+    ADD CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES product(id);
+
 
 INSERT INTO product_category
 VALUES (1, 'Home Consoles', 'Hardware',

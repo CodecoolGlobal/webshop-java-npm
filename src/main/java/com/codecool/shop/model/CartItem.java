@@ -10,6 +10,7 @@ public class CartItem{
     @Expose
     private float sumPrice = 0f;
 
+    public CartItem(){}
     public CartItem(Product product){
         this.product = product;
     }

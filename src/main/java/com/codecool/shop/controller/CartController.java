@@ -3,7 +3,6 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementationWIthJDBC.CartDaoJdbc;
 import com.codecool.shop.model.CartItem;
 import org.thymeleaf.TemplateEngine;
@@ -53,7 +52,7 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        CartDao cartDataStore = CartDaoMem.getInstance();
+        CartDao cartDataStore = CartDaoJdbc.getInstance();
         try {
             int prodQuantity = Integer.parseInt(request.getParameter("prodQuantity"));
             int prodId = Integer.parseInt(request.getParameter("prodId"));

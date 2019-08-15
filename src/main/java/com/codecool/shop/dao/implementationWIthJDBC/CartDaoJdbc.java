@@ -31,11 +31,20 @@ public class CartDaoJdbc extends DatabaseAccess implements CartDao {
         return instance;
     }
 
+    public Float getProductprice(int id) throws SQLException {
+        PreparedStatement preparedStatement = con.prepareStatement("SELECT price FROM product WHERE product.id = ?");
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        return resultSet.getFloat(1);
+    }
+
     public void setCartItemQuantity(int quantity, int productId) throws SQLException {
         PreparedStatement preparedStatement = con.prepareStatement("UPDATE cart" +
-                " SET quantity = ? WHERE product_id = ?");
+                " SET quantity = ?, sum_price = ? WHERE product_id = ?");
         preparedStatement.setInt(1, quantity);
-        preparedStatement.setInt(2, productId);
+        preparedStatement.setFloat(2, getProductprice(productId) * quantity);
+        preparedStatement.setInt(3, productId);
         preparedStatement.executeUpdate();
     }
 

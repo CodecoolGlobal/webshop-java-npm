@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:data-th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
     <meta name="author" content="Codecool"/>
@@ -50,7 +51,7 @@
 
 <div class="container">
     <div><a class="btn btn-secondary btn-lg" href="/cart" th:text="'Items in cart: '+${cartSize}">0 Items in cart</a> </div>
-    <div id="products" class="row">
+    <div class="row">
         <div class="col-2">
             <div class="accordion" id="accordionExample">
                 <div class="card">
@@ -68,7 +69,7 @@
                         <div class="card-body">
                             <form action="/products" method="POST">
                                 <ul th:each="sup,iterStat : ${suppliers}">
-                                    <li><input type="radio" name="Suppliers" th:value="${sup.getId()}" id="supID"
+                                    <li><input type="radio" name="Suppliers" th:data-sup-name="${sup.getName()}"th:value="${sup.getId()}" id="supID"
                                                th:for="${sup.getId()}">
                                         <label th:text="${sup.getName()}" for="supID" th:for="${sup.getId()}"></label>
                                     </li>
@@ -81,7 +82,7 @@
             </div>
         </div>
         <div class="col-10">
-            <div id="products" class="row">
+            <div id="products" class="row" th:data-prod="${products}">
                 <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
                     <div class="card">
                         <img class="" src="http://placehold.it/400x250/000/fff"

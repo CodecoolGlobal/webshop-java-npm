@@ -30,6 +30,8 @@ public class CartController extends HttpServlet {
             cartDataStore.remove(productId);
         }catch (NumberFormatException e){
             e.getStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         try {
             for (CartItem cartItem : cartDataStore.getCart()) {
@@ -43,7 +45,11 @@ public class CartController extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        context.setVariable("total", cartDataStore.getTotalPrice());
+        try {
+            context.setVariable("total", cartDataStore.getTotalPrice());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         engine.process("product/cart.html", context, resp.getWriter());
     }
 

@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 public class CartDaoJdbc extends DatabaseAccess implements CartDao {
     Connection con = getConnection();
@@ -40,15 +41,16 @@ public class CartDaoJdbc extends DatabaseAccess implements CartDao {
         ResultSet rs = ps.executeQuery();
         if(rs.next()){
             PreparedStatement preparedStatement = con.prepareStatement("UPDATE cart" +
-                    " SET quantity = ? WHERE product_id = ?");
+                    " SET quantity = ?, sum_price = ? WHERE product_id = ?");
             preparedStatement.setInt(1,rs.getInt("quantity")+1);
-            preparedStatement.setInt(2,productId);
+            preparedStatement.setFloat(2,product.getDefaultPrice() * (rs.getInt("quantity")+1));
+            preparedStatement.setInt(3,productId);
             preparedStatement.executeUpdate();
-            //TODO setSumPrice()
-        }else {
+        } else {
             PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO cart" +
-                    "(quantity, product_id) VALUES (1,?)");
+                    "(quantity, product_id, sum_price) VALUES (1,?,?)");
             preparedStatement.setInt(1,productId);
+            preparedStatement.setFloat(2,product.getDefaultPrice());
             preparedStatement.executeUpdate();
         }
     }
@@ -119,8 +121,11 @@ public class CartDaoJdbc extends DatabaseAccess implements CartDao {
     }
 
     @Override
-    public Float getTotalPrice() {
-        return null;
+    public Float getTotalPrice() throws SQLException {
+        PreparedStatement preparedStatement = con.prepareStatement("SELECT sum(sum_price) FROM cart");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        return resultSet.getFloat(1);
     }
 
     @Override

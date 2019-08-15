@@ -46,7 +46,7 @@ public class CartController extends HttpServlet {
         try {
             context.setVariable("total", cartDataStore.getTotalPrice());
             engine.process("product/cart.html", context, resp.getWriter());
-        } catch (IOException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

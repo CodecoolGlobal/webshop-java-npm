@@ -12,6 +12,6 @@ public interface CartDao {
     void remove(int id);
     Collection<CartItem> getCart() throws SQLException;
     int getCartSize() throws SQLException;
-    Float getTotalPrice();
+    Float getTotalPrice() throws SQLException;
     void clearCart();
 }

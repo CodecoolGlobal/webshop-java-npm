@@ -3,6 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.implementation.CartDaoMem;
+import com.codecool.shop.dao.implementationWIthJDBC.CartDaoJdbc;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -11,13 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(urlPatterns = {"/payment"})
 public class PaymentController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        CartDao cartDaoMem = CartDaoMem.getInstance();
+        CartDao cartDaoJdbc = CartDaoJdbc.getInstance();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
@@ -31,7 +33,11 @@ public class PaymentController extends HttpServlet {
             e.getMessage();
         }context.setVariable("payment_method", method);
 
-        context.setVariable("total", cartDaoMem.getTotalPrice());
+        try {
+            context.setVariable("total", cartDaoJdbc.getTotalPrice());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         engine.process("product/payment.html", context, response.getWriter());
     }
 

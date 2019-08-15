@@ -69,8 +69,7 @@ CREATE TABLE product
     currency    VARCHAR(5),
     description varchar(500),
     category_id INTEGER,
-    supplier_id INTEGER,
-    cart_id     INTEGER
+    supplier_id INTEGER
 );
 
 

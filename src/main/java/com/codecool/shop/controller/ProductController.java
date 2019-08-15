@@ -75,7 +75,7 @@ public class ProductController extends HttpServlet {
             int prodId = Integer.parseInt(productName);
             Product product = productDataStore.find(prodId);
             cartDataStore.add(product);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | SQLException e) {
             e.getStackTrace();
         }
         if (suppliesID == 0) {
@@ -89,7 +89,11 @@ public class ProductController extends HttpServlet {
             e.printStackTrace();
         }
         suppliesID = 0;
-        context.setVariable("cartSize", cartDataStore.getCartSize());
+        try {
+            context.setVariable("cartSize", cartDataStore.getCartSize());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         engine.process("product/index.html", context, resp.getWriter());
     }
 

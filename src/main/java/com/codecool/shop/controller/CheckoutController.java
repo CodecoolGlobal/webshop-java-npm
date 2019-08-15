@@ -30,17 +30,17 @@ public class CheckoutController extends HttpServlet {
         OrderDao orderDataStorage = OrderDaoMem.getInstance();
         CartDao cartDataStorage = CartDaoMem.getInstance();
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        Order order = new Order();
-
-        order.setName(req.getParameter("name"));
-        order.setEmail(req.getParameter("email"));
-        order.setPhoneNumber(req.getParameter("phoneNumber"));
-        order.setBillingAddress(req.getParameter("billingAddress"));
-        order.setShippingAddress(req.getParameter("shippingAddress"));
-        order.setCart(cartDataStorage.getCart());
-
-        orderDataStorage.add(order);
-        context.setVariable("orders",orderDataStorage);
-        resp.sendRedirect(req.getContextPath()+"/payment");
+//        Order order = new Order();
+//
+//        order.setName(req.getParameter("name"));
+//        order.setEmail(req.getParameter("email"));
+//        order.setPhoneNumber(req.getParameter("phoneNumber"));
+//        order.setBillingAddress(req.getParameter("billingAddress"));
+//        order.setShippingAddress(req.getParameter("shippingAddress"));
+//        order.setCart(cartDataStorage.getCart());
+//
+//        orderDataStorage.add(order);
+//        context.setVariable("orders",orderDataStorage);
+//        resp.sendRedirect(req.getContextPath()+"/payment");
     }
 }

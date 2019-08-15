@@ -10,6 +10,20 @@ import java.util.List;
 public class SupplierDaoJdbc extends DatabaseAccess implements SupplierDao {
     private Connection connection = getConnection();
 
+    private static SupplierDaoJdbc instance = null;
+
+    /* A private Constructor prevents any other class from instantiating.
+     */
+    private SupplierDaoJdbc() {
+    }
+
+    public static SupplierDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new SupplierDaoJdbc();
+        }
+        return instance;
+    }
+
     @Deprecated
     @Override
     public void add(Supplier supplier) {
@@ -17,12 +31,20 @@ public class SupplierDaoJdbc extends DatabaseAccess implements SupplierDao {
 
     @Override
     public Supplier find(int id) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM supplier WHERE id=? ");
-        preparedStatement.setInt(1, id);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        Supplier supplier = new Supplier(resultSet.getString(2), resultSet.getString(3));
-        return supplier;
+        ResultSet resultSet;
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM supplier WHERE id=? ")) {
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+
+            Supplier supplier;
+            while (resultSet.next()) {
+                supplier = new Supplier(resultSet.getString("name"),
+                        resultSet.getString("description"));
+                supplier.setId(id);
+                return supplier;
+            }
+        }
+        return null;
     }
 
     @Deprecated
@@ -33,18 +55,21 @@ public class SupplierDaoJdbc extends DatabaseAccess implements SupplierDao {
 
     @Override
     public List<Supplier> getAll() throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM supplier");
-        ResultSet resultSet = preparedStatement.executeQuery();
-        List<Supplier> suppliers = new ArrayList<>();
-        while (resultSet.next()) {
+        ResultSet resultSet;
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM supplier")) {
+            resultSet = preparedStatement.executeQuery();
 
-            Supplier supplier = new Supplier(
-                    resultSet.getString("name"),
-                    resultSet.getString("description")
-            );
-            suppliers.add(supplier);
+            List<Supplier> suppliers = new ArrayList<>();
+            while (resultSet.next()) {
+
+                Supplier supplier = new Supplier(
+                        resultSet.getString("name"),
+                        resultSet.getString("description")
+                );
+                supplier.setId(resultSet.getInt("id"));
+                suppliers.add(supplier);
+            }
+            return suppliers;
         }
-        return suppliers;
-
     }
 }

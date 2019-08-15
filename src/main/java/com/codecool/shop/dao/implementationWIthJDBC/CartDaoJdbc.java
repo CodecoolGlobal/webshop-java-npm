@@ -14,8 +14,22 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CartDaoJdbc extends DatabaseAccess implements CartDao  {
+public class CartDaoJdbc extends DatabaseAccess implements CartDao {
     private Connection connection = getConnection();
+
+    private static CartDaoJdbc instance = null;
+
+    /* A private Constructor prevents any other class from instantiating.
+     */
+    private CartDaoJdbc() {
+    }
+
+    public static CartDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new CartDaoJdbc();
+        }
+        return instance;
+    }
 
     @Override
     public void add(Product product) throws SQLException {
@@ -31,12 +45,14 @@ public class CartDaoJdbc extends DatabaseAccess implements CartDao  {
         preparedStatement.setInt(6,resultSet.getInt(1));
 
     }
+
     @Override
     public void remove(int id) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM cart Where id=?");
         preparedStatement.setInt(1,id);
         preparedStatement.executeUpdate();
     }
+
     @Override
     public Collection<CartItem> getCart() throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("Select * FROM cart INNER JOIN product on cart.id = product.cart_id ");

@@ -21,6 +21,9 @@ public class Order{
     @Expose
     private float orderTotalPrice;
 
+    public Order(String id, String name, String email, String phone_number, String billing_address, String shipping_address) {
+    }
+
     public String getName() {
         return name;
     }

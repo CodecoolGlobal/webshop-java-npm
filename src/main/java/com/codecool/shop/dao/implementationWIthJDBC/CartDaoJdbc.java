@@ -107,6 +107,7 @@ public class CartDaoJdbc extends DatabaseAccess implements CartDao {
             product.setId(resultSet.getInt("product_id"));
             CartItem cartItem = new CartItem(product);
             cartItem.setQuantity(resultSet.getInt("cart_quantity"));
+            cartItem.setSumPrice(resultSet.getInt("cart_quantity") * resultSet.getFloat("product_price"));
             cartItems.add(cartItem);
         }
 

@@ -28,14 +28,12 @@ public class CartController extends HttpServlet {
         try {
             int productId = Integer.parseInt(req.getParameter("id"));
             cartDataStore.remove(productId);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             e.getStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         try {
             for (CartItem cartItem : cartDataStore.getCart()) {
-                 cartItem.setSumPrice(cartItem.getQuantity()*cartItem.getProduct().getPriceFloat());
+                cartItem.setSumPrice(cartItem.getQuantity() * cartItem.getProduct().getPriceFloat());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,10 +45,10 @@ public class CartController extends HttpServlet {
         }
         try {
             context.setVariable("total", cartDataStore.getTotalPrice());
-        } catch (SQLException e) {
+            engine.process("product/cart.html", context, resp.getWriter());
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        engine.process("product/cart.html", context, resp.getWriter());
     }
 
     @Override
@@ -59,15 +57,16 @@ public class CartController extends HttpServlet {
         try {
             int prodQuantity = Integer.parseInt(request.getParameter("prodQuantity"));
             int prodId = Integer.parseInt(request.getParameter("prodId"));
-            for(CartItem cartItem : cartDataStore.getCart()){
-                if(cartItem.getProduct().getId() == prodId){
-                    if(prodQuantity == 0){
+            for (CartItem cartItem : cartDataStore.getCart()) {
+                if (cartItem.getProduct().getId() == prodId) {
+                    if (prodQuantity == 0) {
                         cartDataStore.remove(prodId);
                         break;
-                    }cartItem.setQuantity(prodQuantity);
+                    }
+                    cartItem.setQuantity(prodQuantity);
                 }
             }
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             e.getStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();

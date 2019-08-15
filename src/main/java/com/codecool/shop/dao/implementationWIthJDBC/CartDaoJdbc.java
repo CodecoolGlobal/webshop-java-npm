@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class CartDaoJdbc extends DatabaseAccess implements CartDao {
-    Connection con = getConnection();
+    private  Connection con = getConnection();
 
     private static CartDaoJdbc instance = null;
 
@@ -29,6 +29,14 @@ public class CartDaoJdbc extends DatabaseAccess implements CartDao {
             instance = new CartDaoJdbc();
         }
         return instance;
+    }
+
+    public void setCartItemQuantity(int quantity, int productId) throws SQLException {
+        PreparedStatement preparedStatement = con.prepareStatement("UPDATE cart" +
+                " SET quantity = ? WHERE product_id = ?");
+        preparedStatement.setInt(1, quantity);
+        preparedStatement.setInt(2, productId);
+        preparedStatement.executeUpdate();
     }
 
     @Override

@@ -54,7 +54,7 @@ public class ProductController extends HttpServlet {
             e.getMessage();
         }
         for (Product product : productsByCategory) {
-            if (productsBySupplier.contains(product)) {
+            if(product.getSupplier().getId() == suppliesID){
                 products.add(product);
             }
         }

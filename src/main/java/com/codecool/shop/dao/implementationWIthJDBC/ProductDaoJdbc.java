@@ -35,8 +35,10 @@ public class ProductDaoJdbc extends DatabaseAccess implements ProductDao  {
     }
 
     @Override
-    public Product find(int id) {
-        return null;
+    public Product find(int id) throws SQLException {
+        PreparedStatement preparedStatement = con.prepareStatement(makeStatement()+" WHERE product.id = ?");
+        preparedStatement.setInt(1,id);
+        return getProducts(preparedStatement).get(0);
     }
 
     @Override

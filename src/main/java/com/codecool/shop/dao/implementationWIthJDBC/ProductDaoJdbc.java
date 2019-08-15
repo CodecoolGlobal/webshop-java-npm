@@ -45,7 +45,7 @@ public class ProductDaoJdbc extends DatabaseAccess implements ProductDao  {
     }
 
     private String makeStatement(){
-        String preparable = "SELECT product.name AS product_name, price AS product_price," +
+        String preparable = "SELECT product.id AS product_id, product.name AS product_name, price AS product_price," +
                 " currency AS product_currency, product.description AS product_description," +
                 " pc.id AS product_category_id, pc.name AS product_category_name," +
                 "pc.department AS product_category_department, pc.description AS product_category_description," +
@@ -82,6 +82,7 @@ public class ProductDaoJdbc extends DatabaseAccess implements ProductDao  {
                     rs.getString("product_description"),
                     productCategory,
                     supplier);
+            product.setId(rs.getInt("product_id"));
             products.add(product);
         }
         return products;

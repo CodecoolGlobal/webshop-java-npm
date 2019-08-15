@@ -39,8 +39,8 @@ public class CartDaoJdbc extends DatabaseAccess implements CartDao {
         ps.setInt(1,productId);
         ResultSet rs = ps.executeQuery();
         if(rs.next()){
-            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO cart" +
-                    "(quantity, product_id) VALUES (?,?)");
+            PreparedStatement preparedStatement = con.prepareStatement("UPDATE cart" +
+                    " SET quantity = ? WHERE product_id = ?");
             preparedStatement.setInt(1,rs.getInt("quantity")+1);
             preparedStatement.setInt(2,productId);
             preparedStatement.executeUpdate();

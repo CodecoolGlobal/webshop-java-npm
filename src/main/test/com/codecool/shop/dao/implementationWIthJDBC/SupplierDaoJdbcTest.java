@@ -11,8 +11,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SupplierDaoJdbcTest {
 
+//    @Test
+//    void KAMUcanGetAllSuppliersZSENI() throws SQLException {
+//        //given
+//        DbHelper.initDb();
+//        SupplierDaoJdbc supplierAccessor = SupplierDaoJdbc.getInstance();
+//        //when
+//        List<Supplier> suppliers = supplierAccessor.getAll();
+//        //then
+//        for (int i = 0; i < suppliers.size()-1;i++){
+//            assertEquals(suppliers.get(i), supplierAccessor.get(i));
+//        }
+//    }
+
     @Test
-    void testSupplierGetAllJDBC() throws SQLException {
+    void canGetAllSuppliers() throws SQLException {
         List<Supplier> supplierList = new ArrayList<>();
         supplierList.add(new Supplier("Sony", "Consumer and professional electronics, gaming, entertainment and financial services"));
         supplierList.add(new Supplier("Nintendo", "Consumer electronics and video game company"));
@@ -20,8 +33,7 @@ class SupplierDaoJdbcTest {
         SupplierDaoJdbc supp = SupplierDaoJdbc.getInstance();
         List<Supplier> supplierDaoJdbc = supp.getAll();
         for (int i = 0; i < supplierList.size()-1;i++){
-            assertEquals(supplierList.get(i).getName(),supplierDaoJdbc.get(i).getName());
-            assertEquals(supplierList.get(i).getDescription(),supplierDaoJdbc.get(i).getDescription());
+            assertEquals(supplierList.get(i), supplierDaoJdbc.get(i));
         }
     }
 
